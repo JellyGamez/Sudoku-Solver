@@ -47,6 +47,7 @@ impl Sudoku
             found: false
         }
     }
+    
     pub fn bkt(&mut self, pos: usize)
     {
         if self.found
@@ -85,6 +86,8 @@ impl Sudoku
             }
         }
     }
+
+    #[allow(dead_code)]
     pub fn print(&self)
     {
         for i in 1..10
@@ -107,9 +110,9 @@ fn main() {
     let start = Instant::now();
 
     //file input
-    let filename = "./datasets/1.txt";
+    let filename = "./datasets/2.txt";
     //limit the number of grids
-    let limit = 2;
+    let limit = 20000;
 
     if let Ok(file) = File::open(filename)
     {
