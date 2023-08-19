@@ -1,25 +1,27 @@
+use std::io::{self, BufRead};
 use std::time::Instant;
 use std::fs::File;
-use std::io::{self, BufRead};
+
 mod sudoku;
 use crate::sudoku::Sudoku;
 
-
-fn main() {
-
+fn main() 
+{
     let mut solved = 0;
     let mut board = [[0; 10]; 10];
 
     let start = Instant::now();
 
     //file input
-    let filename = "./datasets/1.txt";
+    let filename = "./datasets/2.txt";
     //limit the number of grids
-    let limit = 1000000;
+    let limit = 10000;
 
     if let Ok(file) = File::open(filename)
     {
         let lines = io::BufReader::new(file).lines();
+        let lines = lines;
+
         for (i, line) in lines.enumerate()
         {
             if i == limit
@@ -44,7 +46,7 @@ fn main() {
         let elapsed = start.elapsed().as_secs_f32();
 
         println!("Grids solved: {}/{limit}", solved);
-        println!("Time elapsed: {:?} seconds", elapsed);
+        println!("Time elapsed: {} seconds", elapsed);
         println!("Average time per grid: {} seconds", elapsed / limit as f32);
         println!("Average grids per second: {}", limit as f32 / elapsed);
     }
