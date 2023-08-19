@@ -2,7 +2,6 @@ use std::time::Instant;
 use std::fs::File;
 use std::io::{self, BufRead};
 
-static mut solved: i32 = 0;
 struct Sudoku
 {
     board: [[i32; 10]; 10],
@@ -104,6 +103,8 @@ impl Sudoku
 }
 
 fn main() {
+
+    let mut solved = 0;
     let mut board = [[0; 10]; 10];
     let start = Instant::now();
 
@@ -112,7 +113,7 @@ fn main() {
     if let Ok(file) = File::open(filename)
     {
         let lines = io::BufReader::new(file).lines();
-        for line in lines
+        for (i, line) in lines.enumerate()
         {
             if let Ok(grid) = line
             {
@@ -122,6 +123,7 @@ fn main() {
                 }
                 let mut sudoku: Sudoku = Sudoku::new(board);
                 sudoku.bkt(0);
+                solved += 1;
             }
         }
     }
