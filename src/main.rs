@@ -13,9 +13,9 @@ fn main() {
     let start = Instant::now();
 
     //file input
-    let filename = "./datasets/2.txt";
+    let filename = "./datasets/1.txt";
     //limit the number of grids
-    let limit = 20000;
+    let limit = 1000000;
 
     if let Ok(file) = File::open(filename)
     {
@@ -34,11 +34,23 @@ fn main() {
                 }
                 let mut sudoku: Sudoku = Sudoku::new(board);
                 sudoku.bkt(0);
-                solved += 1;
+                if sudoku.solved
+                {
+                    solved += 1;
+                }
             }
         }
+
+        let elapsed = start.elapsed().as_secs_f32();
+
+        println!("Grids solved: {}/{limit}", solved);
+        println!("Time elapsed: {:?} seconds", elapsed);
+        println!("Average time per grid: {} seconds", elapsed / limit as f32);
+        println!("Average grids per second: {}", limit as f32 / elapsed);
+    }
+    else 
+    {
+        eprintln!("File not found.");
     }
 
-    println!("Grids solved: {}", solved);
-    println!("Time elapsed: {:?}", start.elapsed().as_secs_f32());
 }  

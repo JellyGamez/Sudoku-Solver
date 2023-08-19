@@ -5,7 +5,7 @@ pub struct Sudoku
     used_col: [[bool; 10]; 10],
     used_box: [[bool; 10]; 10],
     empty: Vec<(usize, usize)>,
-    solved: bool
+    pub solved: bool
 }
 impl Sudoku
 {
