@@ -1,4 +1,6 @@
 use std::time::Instant;
+use std::fs::File;
+use std::io::{self, BufRead};
 struct Sudoku
 {
     board: [[i32; 10]; 10],
@@ -60,7 +62,6 @@ impl Sudoku
 
                 if pos == self.empty.len() - 1
                 {
-                    //self.print();
                     self.found = true;
                     return;
                 }
@@ -86,16 +87,26 @@ impl Sudoku
         }
     }
 }
+
 fn main() {
-    let mut line = String::new();
-    std::io::stdin().read_line(&mut line).unwrap();
     let mut board = [[0; 10]; 10];
-    for (i, digit) in line.trim().bytes().enumerate()
-    {
-        board[i / 9 + 1][i % 9 + 1] = digit as i32 - '0' as i32;
-    }
     let start = Instant::now();
-    let mut sudoku: Sudoku = Sudoku::new(board);
+    let filename = "./datasets/1.txt";
+    if let Ok(file) = File::open(filename)
+    {
+        let reader = io::BufReader::new(file);
+        for line in reader.lines()
+        {
+            if let Ok(ip) = line
+            {
+                for (i, digit) in ip.trim().bytes().enumerate()
+                {
+                    board[i / 9 + 1][i % 9 + 1] = digit as i32 - '0' as i32;
+                    let mut sudoku: Sudoku = Sudoku::new(board);
+                    //sudoku.bkt(0);
+                }
+            }
+        }
+    }
     println!("Time elapsed: {:?}", start.elapsed());
-    sudoku.bkt(0);
 }  
