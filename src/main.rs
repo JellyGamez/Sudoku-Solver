@@ -64,10 +64,6 @@ impl Sudoku
                 if pos == self.empty.len() - 1
                 {
                     self.found = true;
-                    unsafe 
-                    {
-                        solved += 1;
-                    }
                     //self.print();
                     return;
                 }
@@ -95,10 +91,11 @@ impl Sudoku
         {
             for j in 1..10
             {
-                print!("{}", self.board[i][j]);
+                print!("{} ", self.board[i][j]);
             }
             println!();
         }
+        println!();
     }
 }
 
@@ -106,15 +103,23 @@ fn main() {
 
     let mut solved = 0;
     let mut board = [[0; 10]; 10];
+
     let start = Instant::now();
 
-    //file input used for benchmarking
-    let filename = "./datasets/100000.txt";
+    //file input
+    let filename = "./datasets/1.txt";
+    //limit the number of grids
+    let limit = 2;
+
     if let Ok(file) = File::open(filename)
     {
         let lines = io::BufReader::new(file).lines();
         for (i, line) in lines.enumerate()
         {
+            if i == limit
+            {
+                break;
+            }
             if let Ok(grid) = line
             {
                 for (i, digit) in grid.trim().bytes().enumerate()
@@ -128,9 +133,6 @@ fn main() {
         }
     }
 
-    unsafe 
-    {
-        println!("Grids solved: {}", solved);
-    }
+    println!("Grids solved: {}", solved);
     println!("Time elapsed: {:?}", start.elapsed());
 }  
