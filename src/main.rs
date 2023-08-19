@@ -63,6 +63,7 @@ impl Sudoku
                 if pos == self.empty.len() - 1
                 {
                     self.found = true;
+                    //self.print();
                     return;
                 }
                 self.used_row[row][digit] = true;
@@ -102,9 +103,9 @@ fn main() {
                 for (i, digit) in ip.trim().bytes().enumerate()
                 {
                     board[i / 9 + 1][i % 9 + 1] = digit as i32 - '0' as i32;
-                    let mut sudoku: Sudoku = Sudoku::new(board);
-                    //sudoku.bkt(0);
                 }
+                let mut sudoku: Sudoku = Sudoku::new(board);
+                sudoku.bkt(0);
             }
         }
     }
