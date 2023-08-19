@@ -9,11 +9,11 @@ struct Sudoku
     used_col: [[bool; 10]; 10],
     used_box: [[bool; 10]; 10],
     empty: Vec<(usize, usize)>,
-    found: bool
+    solved: bool
 }
 impl Sudoku
 {
-    pub fn new(board: [[i32; 10]; 10]) -> Sudoku 
+    pub fn new(board: [[i32; 10]; 10]) -> Self 
     {
         let mut empty: Vec<(usize, usize)> = Vec::new();
         let mut used_row = [[false; 10]; 10];
@@ -37,20 +37,20 @@ impl Sudoku
                 }
             }
         }
-        Sudoku 
+        Self 
         {
             board: board,
             used_row: used_row,
             used_col: used_col,
             used_box: used_box,
             empty: empty,
-            found: false
+            solved: false
         }
     }
-    
+
     pub fn bkt(&mut self, pos: usize)
     {
-        if self.found
+        if self.solved
         {
             return;
         }
@@ -64,7 +64,7 @@ impl Sudoku
 
                 if pos == self.empty.len() - 1
                 {
-                    self.found = true;
+                    self.solved = true;
                     //self.print();
                     return;
                 }
@@ -75,7 +75,7 @@ impl Sudoku
 
                 self.bkt(pos + 1);
                 
-                if self.found
+                if self.solved
                 {
                     return;
                 }
