@@ -104,7 +104,7 @@ fn main() {
     //file input
     let filename = "./datasets/1.txt";
     //limit the number of grids
-    let limit = 200000;
+    let limit = 100000;
 
     if let Ok(file) = File::open(filename)
     {
