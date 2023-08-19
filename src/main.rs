@@ -78,7 +78,11 @@ impl Sudoku
                 self.used_box[ind][digit] = true;
 
                 self.bkt(pos + 1);
-
+                
+                if self.found
+                {
+                    return;
+                }
 
                 self.used_row[row][digit] = false;
                 self.used_col[col][digit] = false;
