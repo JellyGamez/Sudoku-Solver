@@ -5,7 +5,8 @@ struct Sudoku
     used_row: [[bool; 10]; 10],
     used_col: [[bool; 10]; 10],
     used_box: [[bool; 10]; 10],
-    empty: Vec<(usize, usize)>
+    empty: Vec<(usize, usize)>,
+    found: bool
 }
 impl Sudoku
 {
@@ -39,11 +40,16 @@ impl Sudoku
             used_row: used_row,
             used_col: used_col,
             used_box: used_box,
-            empty: empty
+            empty: empty,
+            found: false
         }
     }
     pub fn bkt(&mut self, pos: usize)
     {
+        if self.found
+        {
+            return;
+        }
         let (row, col) = self.empty[pos];
         let ind = (row - 1) / 3 * 3 + (col - 1) / 3 + 1;
         for digit in 1..10
@@ -54,8 +60,9 @@ impl Sudoku
 
                 if pos == self.empty.len() - 1
                 {
-                    self.print();
-                    std::process::exit(0);
+                    //self.print();
+                    self.found = true;
+                    return;
                 }
                 self.used_row[row][digit] = true;
                 self.used_col[col][digit] = true;
