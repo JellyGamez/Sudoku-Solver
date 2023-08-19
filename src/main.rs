@@ -102,9 +102,9 @@ fn main() {
     let start = Instant::now();
 
     //file input
-    let filename = "./datasets/1.txt";
+    let filename = "./datasets/2.txt";
     //limit the number of grids
-    let limit = 100000;
+    let limit = 500;
 
     if let Ok(file) = File::open(filename)
     {
@@ -128,6 +128,9 @@ fn main() {
         }
     }
 
-    println!("Grids solved: {}", solved);
-    println!("Time elapsed: {:?}", start.elapsed());
+    let elapsed = start.elapsed().as_secs_f32();
+    println!("Grids solved: {}/{limit}", solved);
+    println!("Time elapsed: {} seconds", elapsed);
+    println!("Average time per grid: {} seconds", elapsed / limit as f32);
+    println!("Average grids per second: {}", limit as f32 / elapsed);
 }  
