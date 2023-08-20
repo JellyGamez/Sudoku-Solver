@@ -10,8 +10,8 @@ fn main()
     let mut solved = 0;
     let mut board = [0; 81];
 
-    let filename = "./datasets/medium.txt";
-    let limit = 100000;
+    let filename = "./datasets/easy.txt";
+    let limit = 1000000;
 
     let start = Instant::now();
 

@@ -10,6 +10,7 @@ pub struct Sudoku
 }
 impl Sudoku
 {
+    #[inline]
     pub fn new(board: [u32; 81]) -> Self 
     {
         let mut empty: Vec<(usize, usize, usize)> = Vec::new();
