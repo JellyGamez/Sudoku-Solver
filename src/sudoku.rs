@@ -1,7 +1,7 @@
 use std::fmt;
 pub struct Sudoku
 {
-    board: [[u32; 9]; 9],
+    board: [u32; 81],
     used_row: [u32; 9],
     used_col: [u32; 9],
     used_box: [u32; 9],
@@ -10,7 +10,7 @@ pub struct Sudoku
 }
 impl Sudoku
 {
-    pub fn new(board: [[u32; 9]; 9]) -> Self 
+    pub fn new(board: [u32; 81]) -> Self 
     {
         let mut empty: Vec<(usize, usize, usize)> = Vec::new();
         let (mut used_row, mut used_col, mut used_box) = ([0; 9], [0; 9], [0; 9]);
@@ -18,9 +18,9 @@ impl Sudoku
         {
             for col in 0..9
             {
-                let digit = board[row][col];
+                let digit = board[row * 9 + col];
                 let ind = row / 3 * 3 + col / 3;
-                if board[row][col] == 0
+                if board[9 * row + col] == 0
                 {
                     empty.push((row, col, ind));
                 }
@@ -57,7 +57,7 @@ impl Sudoku
         {
             let candidate = 1u32.checked_shl(candidates.trailing_ones()).unwrap_or(0);
             
-            self.board[row][col] = candidates.trailing_ones() + 1;
+            self.board[row * 9 + col] = candidates.trailing_ones() + 1;
 
             if pos == self.empty.len() - 1
             {
@@ -79,22 +79,6 @@ impl Sudoku
             candidates |= candidate;
         }
     }
-
-    // pub fn get_best(&self) -> usize
-    // {
-    //     let mut best = 0;
-    //     let mut set = 300;
-    //     for (i, (row, col, ind)) in self.empty.iter().enumerate()
-    //     {
-    //         let cur = (self.used_row[*row] | self.used_col[*col] | self.used_box[*ind]).count_zeros();
-    //         if cur != 23 && set > cur
-    //         {
-    //             set = cur;
-    //             best = i;
-    //         }
-    //     }
-    //     best
-    // }
 }
 
 impl fmt::Display for Sudoku {
@@ -105,7 +89,7 @@ impl fmt::Display for Sudoku {
             write!(f, "| ")?;
             for j in 0..9
             {
-                write!(f, "{} ", self.board[i][j])?;
+                write!(f, "{} ", self.board[i * 9 + j])?;
                 if j % 3 == 2
                 {
                     write!(f, "| ")?;

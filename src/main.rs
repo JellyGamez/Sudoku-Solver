@@ -8,10 +8,10 @@ use crate::sudoku::Sudoku;
 fn main() 
 {
     let mut solved = 0;
-    let mut board = [[0; 9]; 9];
+    let mut board = [0; 81];
 
-    let filename = "./datasets/17clue.txt";
-    let limit = 10000;
+    let filename = "./datasets/medium.txt";
+    let limit = 100000;
 
     let start = Instant::now();
 
@@ -30,7 +30,7 @@ fn main()
             {
                 for (i, digit) in grid.trim().bytes().enumerate()
                 {
-                    board[i / 9][i % 9] = digit as u32 - '0' as u32;
+                    board[i] = digit as u32 - '0' as u32;
                 }
                 let mut sudoku: Sudoku = Sudoku::new(board);
                 sudoku.solve(0);
