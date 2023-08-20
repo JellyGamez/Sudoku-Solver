@@ -11,7 +11,7 @@ pub struct Sudoku
 impl Sudoku
 {
     #[inline]
-    pub fn new(board: [u32; 81]) -> Self 
+    pub fn new(board: [u32; 81]) -> Sudoku 
     {
         let mut empty: Vec<(usize, usize, usize)> = Vec::new();
         let (mut used_row, mut used_col, mut used_box) = ([0; 9], [0; 9], [0; 9]);
@@ -34,7 +34,7 @@ impl Sudoku
                 }
             }
         }
-        Self 
+        Sudoku
         {
             board: board,
             used_row: used_row,
@@ -47,8 +47,7 @@ impl Sudoku
 
     pub fn solve(&mut self, pos: usize)
     {
-        if self.solved
-        {
+        if self.solved {
             return;
         }
         let (row, col, ind) = self.empty[pos];
@@ -57,7 +56,6 @@ impl Sudoku
         while candidates != 511
         {
             let candidate = 1u32.checked_shl(candidates.trailing_ones()).unwrap_or(0);
-            
             self.board[row * 9 + col] = candidates.trailing_ones() + 1;
 
             if pos == self.empty.len() - 1
@@ -73,11 +71,10 @@ impl Sudoku
 
             self.solve(pos + 1);
 
-            if self.solved
-            {
+            if self.solved {
                 return;
             }
-
+            
             self.used_row[row] ^= candidate;
             self.used_col[col] ^= candidate;
             self.used_box[ind] ^= candidate;
