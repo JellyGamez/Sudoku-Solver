@@ -11,7 +11,7 @@ fn main()
     let mut board = [[0; 9]; 9];
 
     let filename = "./datasets/easy.txt";
-    let limit = 1;
+    let limit = 1000000;
 
     let start = Instant::now();
 

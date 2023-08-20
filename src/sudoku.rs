@@ -26,9 +26,9 @@ impl Sudoku
                 else 
                 {
                     let digit = digit as usize;
-                    used_row[row] |= 1 << digit;
-                    used_col[col] |= 1 << digit;
-                    used_box[ind] |= 1 << digit;
+                    used_row[row] |= 1 << (digit - 1);
+                    used_col[col] |= 1 << (digit - 1);
+                    used_box[ind] |= 1 << (digit - 1);
                 }
             }
         }
@@ -49,41 +49,38 @@ impl Sudoku
         {
             return;
         }
-        
+
         let (row, col, ind) = self.empty[pos];
+        let mut candidates = self.used_row[row] | self.used_col[col] | self.used_box[ind];
 
-        for digit in 1..10
+        //println!("{:b} {:b} {:b}", self.used_row[row], self.used_col[col], self.used_box[ind]);
+
+        while candidates != 511
         {
-            let (row_bit, col_bit, box_bit) = (row_bit << (digit - 1), col_bit << (digit - 1), box_bit << (digit - 1));
-            if (self.used_row & row_bit) | (self.used_col & col_bit) | (self.used_box & box_bit) == 0
+            
+            let candidate = 1u32.checked_shl(candidates.trailing_ones()).unwrap_or(0);
+
+            //println!("{:b} {}", candidates, candidate);
+
+            candidates |= candidate;
+            self.board[row][col] = candidate;
+
+            if pos == self.empty.len() - 1
             {
-                self.board[row][col] = digit as i32;
-
-                if pos == self.empty.len() - 1
-                {
-                    self.solved = true;
-                    // self.print();
-                    // println!("{:b}", self.used_row);
-                    // println!("{:b}", self.used_col);
-                    // println!("{:b}", self.used_box);
-                    return;
-                }
-
-                self.used_row |= row_bit;
-                self.used_col |= col_bit;
-                self.used_box |= box_bit;
-
-                self.solve(pos + 1);
-                
-                if self.solved
-                {
-                    return;
-                }
-
-                self.used_row ^= row_bit;
-                self.used_col ^= col_bit;
-                self.used_box ^= box_bit;
+                self.solved = true;
+                // self.print();
+                return;
             }
+
+            self.used_row[row] |= candidate;
+            self.used_col[col] |= candidate;
+            self.used_box[ind] |= candidate;
+
+            self.solve(pos + 1);
+
+            self.used_row[row] ^= candidate;
+            self.used_col[col] ^= candidate;
+            self.used_box[ind] ^= candidate;
         }
     }
 
