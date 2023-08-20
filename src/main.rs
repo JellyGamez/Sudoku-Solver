@@ -10,12 +10,10 @@ fn main()
     let mut solved = 0;
     let mut board = [[0; 10]; 10];
 
-    let start = Instant::now();
-
-    //file input
-    let filename = "./datasets/2.txt";
-    //limit the number of grids
+    let filename = "./datasets/easy.txt";
     let limit = 10000;
+
+    let start = Instant::now();
 
     if let Ok(file) = File::open(filename)
     {

@@ -1,9 +1,10 @@
 pub struct Sudoku
 {
+    
     board: [[i32; 10]; 10],
-    used_row: [[bool; 10]; 10],
-    used_col: [[bool; 10]; 10],
-    used_box: [[bool; 10]; 10],
+    used_row: i128,
+    used_col: i128,
+    used_box: i128,
     empty: Vec<(usize, usize)>,
     pub solved: bool
 }
@@ -12,9 +13,7 @@ impl Sudoku
     pub fn new(board: [[i32; 10]; 10]) -> Self 
     {
         let mut empty: Vec<(usize, usize)> = Vec::new();
-        let mut used_row = [[false; 10]; 10];
-        let mut used_col = [[false; 10]; 10];
-        let mut used_box = [[false; 10]; 10];
+        let (mut used_row, mut used_col, mut used_box) = (0, 0, 0);
         for row in 1..10
         {
             for col in 1..10
@@ -27,9 +26,13 @@ impl Sudoku
                 }
                 else 
                 {
-                    used_row[row][digit as usize] = true;
-                    used_col[col][digit as usize] = true;
-                    used_box[ind][digit as usize] = true;
+                    let digit = digit as usize;
+                    used_row |= 1 << (9 * row + digit);
+                    used_col |= 1 << (9 * col + digit);
+                    used_box |= 1 << (9 * ind + digit);
+                    // used_row[row][digit as usize] = true;
+                    // used_col[col][digit as usize] = true;
+                    // used_box[ind][digit as usize] = true;
                 }
             }
         }
@@ -54,7 +57,8 @@ impl Sudoku
         let ind = (row - 1) / 3 * 3 + (col - 1) / 3 + 1;
         for digit in 1..10
         {
-            if !self.used_row[row][digit] && !self.used_col[col][digit] && !self.used_box[ind][digit]
+            let (row_bit, col_bit, box_bit) = (1 << (9 * row + digit), 1 << (9 * col + digit), 1 << (9 * ind + digit));
+            if (self.used_row & row_bit) | (self.used_col & col_bit) | (self.used_box & box_bit) == 0
             {
                 self.board[row][col] = digit as i32;
 
@@ -65,9 +69,9 @@ impl Sudoku
                     return;
                 }
 
-                self.used_row[row][digit] = true;
-                self.used_col[col][digit] = true;
-                self.used_box[ind][digit] = true;
+                self.used_row |= row_bit;
+                self.used_col |= col_bit;
+                self.used_box |= box_bit;
 
                 self.bkt(pos + 1);
                 
@@ -76,9 +80,9 @@ impl Sudoku
                     return;
                 }
 
-                self.used_row[row][digit] = false;
-                self.used_col[col][digit] = false;
-                self.used_box[ind][digit] = false;
+                self.used_row ^= row_bit;
+                self.used_col ^= col_bit;
+                self.used_box ^= box_bit;
             }
         }
     }
