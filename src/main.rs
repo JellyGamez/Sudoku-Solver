@@ -10,8 +10,8 @@ fn main()
     let mut solved = 0;
     let mut board = [0; 81];
 
-    let filename = "./datasets/easy.txt";
-    let limit = 100000;
+    let filename = "./datasets/mai bine fac de mana.txt";
+    let limit = 51;
 
     let start = Instant::now();
 

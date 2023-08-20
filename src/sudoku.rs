@@ -34,6 +34,8 @@ impl Sudoku
                 }
             }
         }
+        //empty.sort_by_key(|x| ((used_row[x.0] | used_col[x.1] | used_box[x.2]) as u32).count_ones());
+        //empty.reverse();
         Sudoku
         {
             board: board,
