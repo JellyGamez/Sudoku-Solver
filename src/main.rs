@@ -11,7 +11,7 @@ fn main()
     let mut board = [[0; 9]; 9];
 
     let filename = "./datasets/17clue.txt";
-    let limit = 100;
+    let limit = 10000;
 
     let start = Instant::now();
 

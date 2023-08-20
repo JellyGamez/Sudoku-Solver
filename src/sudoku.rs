@@ -13,7 +13,7 @@ impl Sudoku
     pub fn new(board: [[u32; 9]; 9]) -> Self 
     {
         let mut empty: Vec<(usize, usize, usize)> = Vec::new();
-        let (mut used_row, mut used_col, mut used_box) = ([511; 9], [511; 9], [511; 9]);
+        let (mut used_row, mut used_col, mut used_box) = ([0; 9], [0; 9], [0; 9]);
         for row in 0..9
         {
             for col in 0..9
@@ -27,9 +27,9 @@ impl Sudoku
                 else 
                 {
                     let digit = digit as usize;
-                    used_row[row] ^= 1 << (digit - 1);
-                    used_col[col] ^= 1 << (digit - 1);
-                    used_box[ind] ^= 1 << (digit - 1);
+                    used_row[row] |= 1 << (digit - 1);
+                    used_col[col] |= 1 << (digit - 1);
+                    used_box[ind] |= 1 << (digit - 1);
                 }
             }
         }
@@ -50,16 +50,14 @@ impl Sudoku
         {
             return;
         }
-
         let (row, col, ind) = self.empty[pos];
         let mut candidates = self.used_row[row] | self.used_col[col] | self.used_box[ind];
 
-        while candidates != 0
+        while candidates != 511
         {
-            let candidate = 1u32.checked_shl(candidates.trailing_zeros()).unwrap_or(0);
-
-            candidates ^= candidate;
-            self.board[row][col] = candidate;
+            let candidate = 1u32.checked_shl(candidates.trailing_ones()).unwrap_or(0);
+            
+            self.board[row][col] = candidates.trailing_ones() + 1;
 
             if pos == self.empty.len() - 1
             {
@@ -68,17 +66,35 @@ impl Sudoku
                 return;
             }
 
+            self.used_row[row] |= candidate;
+            self.used_col[col] |= candidate;
+            self.used_box[ind] |= candidate;
+
+            self.solve(pos + 1);
+
             self.used_row[row] ^= candidate;
             self.used_col[col] ^= candidate;
             self.used_box[ind] ^= candidate;
 
-            self.solve(pos + 1);
-
-            self.used_row[row] |= candidate;
-            self.used_col[col] |= candidate;
-            self.used_box[ind] |= candidate;
+            candidates |= candidate;
         }
     }
+
+    // pub fn get_best(&self) -> usize
+    // {
+    //     let mut best = 0;
+    //     let mut set = 300;
+    //     for (i, (row, col, ind)) in self.empty.iter().enumerate()
+    //     {
+    //         let cur = (self.used_row[*row] | self.used_col[*col] | self.used_box[*ind]).count_zeros();
+    //         if cur != 23 && set > cur
+    //         {
+    //             set = cur;
+    //             best = i;
+    //         }
+    //     }
+    //     best
+    // }
 }
 
 impl fmt::Display for Sudoku {
@@ -86,7 +102,7 @@ impl fmt::Display for Sudoku {
         writeln!(f, "+-------+-------+-------+")?;
         for i in 0..9
         {
-            write!(f, "| ");
+            write!(f, "| ")?;
             for j in 0..9
             {
                 write!(f, "{} ", self.board[i][j])?;
