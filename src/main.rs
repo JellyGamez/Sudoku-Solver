@@ -13,7 +13,7 @@ fn main()
     let start = Instant::now();
 
     //file input
-    let filename = "./datasets/2.txt";
+    let filename = "./datasets/easy.txt";
     //limit the number of grids
     let limit = 10000;
 
