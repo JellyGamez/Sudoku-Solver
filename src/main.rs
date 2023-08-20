@@ -74,6 +74,10 @@ impl Sudoku
 
                 self.bkt(pos + 1);
 
+                if self.found
+                {
+                    return;
+                }
 
                 self.used_row[row][digit] = false;
                 self.used_col[col][digit] = false;
@@ -102,9 +106,9 @@ fn main() {
     let start = Instant::now();
 
     //file input
-    let filename = "./datasets/2.txt";
+    let filename = "./datasets/easy.txt";
     //limit the number of grids
-    let limit = 500;
+    let limit = 10000;
 
     if let Ok(file) = File::open(filename)
     {
