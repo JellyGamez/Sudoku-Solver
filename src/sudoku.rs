@@ -1,39 +1,42 @@
+use std::fmt;
 pub struct Sudoku
 {
-    board: [[i32; 10]; 10],
-    used_row: [[bool; 10]; 10],
-    used_col: [[bool; 10]; 10],
-    used_box: [[bool; 10]; 10],
-    empty: Vec<(usize, usize)>,
+    board: [u32; 81],
+    used_row: [u32; 9],
+    used_col: [u32; 9],
+    used_box: [u32; 9],
+    empty: Vec<(usize, usize, usize)>,
     pub solved: bool
 }
 impl Sudoku
 {
-    pub fn new(board: [[i32; 10]; 10]) -> Self 
+    #[inline]
+    pub fn new(board: [u32; 81]) -> Sudoku 
     {
-        let mut empty: Vec<(usize, usize)> = Vec::new();
-        let mut used_row = [[false; 10]; 10];
-        let mut used_col = [[false; 10]; 10];
-        let mut used_box = [[false; 10]; 10];
-        for row in 1..10
+        let mut empty: Vec<(usize, usize, usize)> = Vec::new();
+        let (mut used_row, mut used_col, mut used_box) = ([0; 9], [0; 9], [0; 9]);
+        for row in 0..9
         {
-            for col in 1..10
+            for col in 0..9
             {
-                let digit = board[row][col];
-                let ind = (row - 1) / 3 * 3 + (col - 1) / 3 + 1;
-                if board[row][col] == 0
+                let digit = board[row * 9 + col];
+                let ind = row / 3 * 3 + col / 3;
+                if board[9 * row + col] == 0
                 {
-                    empty.push((row, col));
+                    empty.push((row, col, ind));
                 }
                 else 
                 {
-                    used_row[row][digit as usize] = true;
-                    used_col[col][digit as usize] = true;
-                    used_box[ind][digit as usize] = true;
+                    let digit = digit as usize;
+                    used_row[row] |= 1 << (digit - 1);
+                    used_col[col] |= 1 << (digit - 1);
+                    used_box[ind] |= 1 << (digit - 1);
                 }
             }
         }
-        Self 
+        //empty.sort_by_key(|x| ((used_row[x.0] | used_col[x.1] | used_box[x.2]) as u32).count_ones());
+        //empty.reverse();
+        Sudoku
         {
             board: board,
             used_row: used_row,
@@ -44,56 +47,65 @@ impl Sudoku
         }
     }
 
-    pub fn bkt(&mut self, pos: usize)
+    pub fn solve(&mut self, pos: usize)
     {
-        if self.solved
-        {
+        if self.solved {
             return;
         }
-        let (row, col) = self.empty[pos];
-        let ind = (row - 1) / 3 * 3 + (col - 1) / 3 + 1;
-        for digit in 1..10
+        let (row, col, ind) = self.empty[pos];
+        let mut candidates = self.used_row[row] | self.used_col[col] | self.used_box[ind];
+
+        while candidates != 511
         {
-            if !self.used_row[row][digit] && !self.used_col[col][digit] && !self.used_box[ind][digit]
+            let candidate = 1u32.checked_shl(candidates.trailing_ones()).unwrap_or(0);
+            self.board[row * 9 + col] = candidates.trailing_ones() + 1;
+
+            if pos == self.empty.len() - 1
             {
-                self.board[row][col] = digit as i32;
-
-                if pos == self.empty.len() - 1
-                {
-                    self.solved = true;
-                    //self.print();
-                    return;
-                }
-
-                self.used_row[row][digit] = true;
-                self.used_col[col][digit] = true;
-                self.used_box[ind][digit] = true;
-
-                self.bkt(pos + 1);
-                
-                if self.solved
-                {
-                    return;
-                }
-
-                self.used_row[row][digit] = false;
-                self.used_col[col][digit] = false;
-                self.used_box[ind][digit] = false;
+                self.solved = true;
+                //println!("{}", self);
+                return;
             }
+
+            self.used_row[row] |= candidate;
+            self.used_col[col] |= candidate;
+            self.used_box[ind] |= candidate;
+
+            self.solve(pos + 1);
+
+            if self.solved {
+                return;
+            }
+            
+            self.used_row[row] ^= candidate;
+            self.used_col[col] ^= candidate;
+            self.used_box[ind] ^= candidate;
+
+            candidates |= candidate;
         }
     }
+}
 
-    #[allow(dead_code)]
-    pub fn print(&self)
-    {
-        for i in 1..10
+impl fmt::Display for Sudoku {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        writeln!(f, "+-------+-------+-------+")?;
+        for i in 0..9
         {
-            for j in 1..10
+            write!(f, "| ")?;
+            for j in 0..9
             {
-                print!("{} ", self.board[i][j]);
+                write!(f, "{} ", self.board[i * 9 + j])?;
+                if j % 3 == 2
+                {
+                    write!(f, "| ")?;
+                }
             }
-            println!();
+            writeln!(f)?;
+            if i % 3 == 2
+            {
+                writeln!(f, "+-------+-------+-------+")?;
+            }
         }
-        println!();
+        writeln!(f)
     }
 }
