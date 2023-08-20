@@ -73,6 +73,11 @@ impl Sudoku
 
             self.solve(pos + 1);
 
+            if self.solved
+            {
+                return;
+            }
+
             self.used_row[row] ^= candidate;
             self.used_col[col] ^= candidate;
             self.used_box[ind] ^= candidate;
