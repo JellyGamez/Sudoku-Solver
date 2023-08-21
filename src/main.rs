@@ -10,8 +10,8 @@ fn main()
     let mut solved = 0;
     let mut board = [0; 81];
 
-    let filename = "./datasets/mai bine fac de mana.txt";
-    let limit = 51;
+    let filename = "./datasets/easy.txt";
+    let limit = 1000000;
 
     let start = Instant::now();
 
@@ -33,7 +33,7 @@ fn main()
                     board[i] = digit as u32 - '0' as u32;
                 }
                 let mut sudoku: Sudoku = Sudoku::new(board);
-                sudoku.solve(0);
+                //sudoku.solve(0);
                 if sudoku.solved
                 {
                     solved += 1;
