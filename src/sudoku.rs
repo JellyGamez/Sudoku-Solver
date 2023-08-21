@@ -14,7 +14,7 @@ impl Sudoku
     pub fn new(board: [u32; 81]) -> Sudoku 
     {
         let mut empty: Vec<(usize, usize, usize)> = Vec::new();
-        let (mut used_row, mut used_col, mut used_box) = ([0; 9], [0; 9], [0; 9]);
+        let (mut used_row, mut used_col, mut used_box, mut used) = ([0; 9], [0; 9], [0; 9], [0; 81]);
         for row in 0..9
         {
             for col in 0..9
@@ -34,8 +34,15 @@ impl Sudoku
                 }
             }
         }
-        //empty.sort_by_key(|x| ((used_row[x.0] | used_col[x.1] | used_box[x.2]) as u32).count_ones());
-        //empty.reverse();
+        for row in 0..9
+        {
+            for col in 0..9
+            {
+                used[row * 9 + col] = used_row[row] | used_col[col] | used_box[row / 3 * 3 + col / 3];
+            }
+        }
+        empty.sort_by_key(|x| used[9 * x.0 + x.1]);
+        empty.reverse();
         Sudoku
         {
             board: board,
