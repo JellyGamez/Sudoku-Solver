@@ -6,13 +6,13 @@ pub struct Sudoku
     used_col: [u32; 9],
     used_box: [u32; 9],
     empty: Vec<(usize, usize, usize)>,
-    pub min_heuristic: bool,
-    pub solved: bool
+    pub solved: bool,
+    pub heuristic: bool,
 }
 impl Sudoku
 {
     #[inline]
-    pub fn new(board: [u32; 81], min_heuristic: bool) -> Sudoku 
+    pub fn new(board: [u32; 81], heuristic: bool) -> Sudoku 
     {
         let mut empty: Vec<(usize, usize, usize)> = Vec::new();
         let (mut used_row, mut used_col, mut used_box) = ([0; 9], [0; 9], [0; 9]);
@@ -42,8 +42,9 @@ impl Sudoku
             used_col: used_col,
             used_box: used_box,
             empty: empty,
-            min_heuristic: min_heuristic,
-            solved: false
+            solved: false,
+            heuristic: heuristic,
+
         }
     }
 
@@ -58,7 +59,7 @@ impl Sudoku
             self.solved = true;
             return;
         }
-        if self.min_heuristic
+        if self.heuristic
         {
             let mut best = 1;
             let mut fewest_candidates = 9;
