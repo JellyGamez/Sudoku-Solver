@@ -32,8 +32,9 @@ fn main()
                 {
                     board[i] = digit as u32 - '0' as u32;
                 }
-                let mut sudoku: Sudoku = Sudoku::new(board);
-                //sudoku.solve(0);
+                let mut sudoku: Sudoku = Sudoku::new(board, true);
+                sudoku.solve(0);
+                //println!("{}", sudoku);
                 if sudoku.solved
                 {
                     solved += 1;

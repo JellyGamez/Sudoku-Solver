@@ -6,15 +6,16 @@ pub struct Sudoku
     used_col: [u32; 9],
     used_box: [u32; 9],
     empty: Vec<(usize, usize, usize)>,
+    pub min_heuristic: bool,
     pub solved: bool
 }
 impl Sudoku
 {
     #[inline]
-    pub fn new(board: [u32; 81]) -> Sudoku 
+    pub fn new(board: [u32; 81], min_heuristic: bool) -> Sudoku 
     {
         let mut empty: Vec<(usize, usize, usize)> = Vec::new();
-        let (mut used_row, mut used_col, mut used_box, mut used) = ([0; 9], [0; 9], [0; 9], [0; 81]);
+        let (mut used_row, mut used_col, mut used_box) = ([0; 9], [0; 9], [0; 9]);
         for row in 0..9
         {
             for col in 0..9
@@ -34,15 +35,6 @@ impl Sudoku
                 }
             }
         }
-        for row in 0..9
-        {
-            for col in 0..9
-            {
-                used[row * 9 + col] = used_row[row] | used_col[col] | used_box[row / 3 * 3 + col / 3];
-            }
-        }
-        empty.sort_by_key(|x| used[9 * x.0 + x.1]);
-        empty.reverse();
         Sudoku
         {
             board: board,
@@ -50,14 +42,38 @@ impl Sudoku
             used_col: used_col,
             used_box: used_box,
             empty: empty,
+            min_heuristic: min_heuristic,
             solved: false
         }
     }
 
+    //#[inline]
     pub fn solve(&mut self, pos: usize)
     {
-        if self.solved {
+        if self.solved 
+        {
             return;
+        }
+        if pos == self.empty.len() {
+            self.solved = true;
+            return;
+        }
+        if self.min_heuristic
+        {
+            let mut best = 1;
+            let mut fewest_candidates = 9;
+            for i in pos..self.empty.len()
+            {
+                let (row, col, ind) = self.empty[i];
+                let current_candidates = 9 - (self.used_row[row] | self.used_col[col] | self.used_box[ind]).count_ones();
+
+                if current_candidates < fewest_candidates
+                {
+                    fewest_candidates = current_candidates;
+                    best = i;
+                }
+            }
+            (self.empty[pos], self.empty[best]) = (self.empty[best], self.empty[pos]);
         }
         let (row, col, ind) = self.empty[pos];
         let mut candidates = self.used_row[row] | self.used_col[col] | self.used_box[ind];
@@ -67,20 +83,14 @@ impl Sudoku
             let candidate = 1u32.checked_shl(candidates.trailing_ones()).unwrap_or(0);
             self.board[row * 9 + col] = candidates.trailing_ones() + 1;
 
-            if pos == self.empty.len() - 1
-            {
-                self.solved = true;
-                //println!("{}", self);
-                return;
-            }
-
             self.used_row[row] |= candidate;
             self.used_col[col] |= candidate;
             self.used_box[ind] |= candidate;
 
             self.solve(pos + 1);
 
-            if self.solved {
+            if self.solved 
+            {
                 return;
             }
             
