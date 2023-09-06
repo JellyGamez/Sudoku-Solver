@@ -3,11 +3,11 @@ use std::time::Instant;
 use std::fs::File;
 
 mod sudoku;
-use crate::sudoku::Sudoku;
 mod config;
+use crate::sudoku::Sudoku;
 use crate::config::
 {
-    FILENAME as filename, 
+    FILE_NAME as file_name, 
     PRINT_STATS as print_stats,
     NUMBER_OF_GRIDS as number_of_grids, 
     PRINT_SOLVED_GRIDS as print_solved_grids,
@@ -21,7 +21,7 @@ fn main()
 
     let start = Instant::now();
 
-    if let Ok(file) = File::open(filename)
+    if let Ok(file) = File::open(file_name)
     {
         let lines = io::BufReader::new(file).lines();
 
@@ -58,10 +58,10 @@ fn main()
 
         if print_stats
         {
-            println!("Grids solved: {}/{number_of_grids}", solved);
+            println!("Grids solved: {}/{}", solved, number_of_grids);
             println!("Time elapsed: {} seconds", elapsed);
-            println!("Average time per grid: {} seconds", elapsed / number_of_grids as f32);
-            println!("Average grids per second: {}", number_of_grids as f32 / elapsed);
+            println!("Average time per grid: {} seconds", elapsed / solved as f32);
+            println!("Average grids per second: {}", solved as f32 / elapsed);
         }
     }
     else 
