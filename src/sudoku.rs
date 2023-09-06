@@ -9,7 +9,6 @@ pub struct Sudoku
     pub solved: bool,
     pub heuristic: bool,
 }
-
 impl Sudoku
 {
     #[inline]
