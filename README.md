@@ -1,7 +1,9 @@
 # Sudoku solver
 
 ## Introduction
-This project brings together my passion for Sudoku and my eagerness to learn a new programming language. So i gave myself a challenge and went with Rust, which I was completely unfamiliar with.
+This project brings together my passion for Sudoku and my eagerness to learn a new programming language. I gave myself a challenge and went with Rust, which I was completely unfamiliar with.
+
+
 
 ## Approach
 The solver employs a **backtracking** algorithm to progressively solve a given puzzle. It keeps track of all the empty cells and makes use of **bitmasks** to instantly fetch all the possible candidates for a specific cell.
