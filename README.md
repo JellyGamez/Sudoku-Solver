@@ -75,7 +75,7 @@ Additionally, I used [this](https://github.com/t-dillon/tdoku/blob/master/data.z
 ### Template
 Each input grid has to respect the following template:
 
-- It should be a string with a length of exactly 81 characters, representing the initial state of the puzzle.
+- It must be a string with a length of exactly 81 characters, representing the initial state of the puzzle.
 - Use '0' to denote empty cells and digits from '1' to '9' for cells that are already solved
 - The puzzle must be a valid sudoku puzzle with at least one solution
 - Example: **004300209005009001070060043006002087190007400050083000600000105003508690042910300**
