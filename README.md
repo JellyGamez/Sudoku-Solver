@@ -79,7 +79,7 @@ git clone https://github.com/JellyGamez/Sudoku-solver.git
 cd Sudoku-solver
 ```
 
-### 3. Set up the config.rs file
+### 3. Set up the configuration file
   The configuration process is explained [here](#configuration).
   
 ### 4. Launch the solver
