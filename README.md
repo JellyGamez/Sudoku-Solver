@@ -65,7 +65,7 @@ cd Sudoku-solver
 ```
 
 ### 3. Set up the config.rs file
-  The configuration variables are explained [here](#configuration).
+  The configuration process is explained [here](#configuration).
 ### 4. Launch the solver
 ```sh
 cargo run --release
