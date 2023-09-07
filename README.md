@@ -23,15 +23,15 @@ There are 3 main datasets I used for benchmarking:
   
 | [1. Easy](https://www.kaggle.com/datasets/bryanpark/sudoku) |
 |:--------:|
-|<img src="https://github.com/JellyGamez/Sudoku-solver/assets/75379898/3b8f0c11-93f0-4e9e-9306-4580fc6151dc" width="600px">|
+|<img src="https://github.com/JellyGamez/Sudoku-solver/assets/75379898/3b8f0c11-93f0-4e9e-9306-4580fc6151dc" width="500px">|
 
 | [2. Medium](https://www.kaggle.com/datasets/rohanrao/sudoku) |
 |:--------:|
-|<img src="https://github.com/JellyGamez/Sudoku-solver/assets/75379898/daf66a41-7d3a-4400-b5ce-f9f92a175254" width="600px">|
+|<img src="https://github.com/JellyGamez/Sudoku-solver/assets/75379898/daf66a41-7d3a-4400-b5ce-f9f92a175254" width="500px">|
 
 | [3. Hard](https://www.kaggle.com/datasets/radcliffe/3-million-sudoku-puzzles-with-ratings) |
 |:--------:|
-|<img src="https://github.com/JellyGamez/Sudoku-solver/assets/75379898/a22eb02f-a04b-49df-8600-b79e508df0f4" width="600px">|
+|<img src="https://github.com/JellyGamez/Sudoku-solver/assets/75379898/a22eb02f-a04b-49df-8600-b79e508df0f4" width="500px">|
 
 </div>
 
