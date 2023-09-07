@@ -13,14 +13,23 @@ It can also be configured to use a **heuristic** known as **MRV** (Minimum Remai
 **In practice**, depending on the provided dataset, this option can either speed up the algorithm by as much as **1000x** (particularly for 17 clue grids with overall large candidates sets), or it might marginally affect performance (typically applies to easy grids, as the number of candidates for each cell is already very small, making the selection of the best cell almost redundant).
 
 ## Benchmarks
+
+### The following benchmarks represent the average results obtained from 5 distinct runs for each dataset across all versions.
+
+
+
+  
+  
 There are 3 main datasets I used for benchmarking:
 
 | [Easy](https://www.kaggle.com/datasets/bryanpark/sudoku) | [Medium](https://www.kaggle.com/datasets/rohanrao/sudoku) | [Hard](https://www.kaggle.com/datasets/radcliffe/3-million-sudoku-puzzles-with-ratings) |
 |------|--------|------|
 |<img src="https://github.com/JellyGamez/Sudoku-solver/assets/75379898/3b8f0c11-93f0-4e9e-9306-4580fc6151dc" width="700px">|<img src="https://github.com/JellyGamez/Sudoku-solver/assets/75379898/daf66a41-7d3a-4400-b5ce-f9f92a175254" width="700px">|<img src="https://github.com/JellyGamez/Sudoku-solver/assets/75379898/a22eb02f-a04b-49df-8600-b79e508df0f4" width="700px">|
 
+Additionally, I used [this](https://github.com/t-dillon/tdoku/blob/master/data.zip) dataset which consists of only 17 clues puzzles.
 <div align="center">
   
+<!--
 | [1. Easy](https://www.kaggle.com/datasets/bryanpark/sudoku) |
 |:--------:|
 |<img src="https://github.com/JellyGamez/Sudoku-solver/assets/75379898/3b8f0c11-93f0-4e9e-9306-4580fc6151dc" width="500px">|
@@ -32,12 +41,28 @@ There are 3 main datasets I used for benchmarking:
 | [3. Hard](https://www.kaggle.com/datasets/radcliffe/3-million-sudoku-puzzles-with-ratings) |
 |:--------:|
 |<img src="https://github.com/JellyGamez/Sudoku-solver/assets/75379898/a22eb02f-a04b-49df-8600-b79e508df0f4" width="500px">|
-
-</div>
+-->
 
 <img src="https://github.com/JellyGamez/Sudoku-solver/assets/75379898/c4b9ba4d-d2cc-4c0a-8e95-9d353be72d56" width="700px">
+
+#### Raw data
+| Grids/second | v1.0      | v2.0      | v3.0      | v3.0 with heuristic |
+|--------------|-----------|-----------|-----------|---------------------|
+| Easy         | 142.255,70 | 405.282,80 | 461.203,11 | 229.084,10       |
+| Medium       | 28.439,10  | 108.977,01 | 120.452,13 | 242.720,17       |
+| Hard         | 263,97    | 1.145,40   | 1.317,99   | 36.148,05         |
+
+
+<!-- -->
+
 <img src="https://github.com/JellyGamez/Sudoku-solver/assets/75379898/4aedca9f-55cf-41b4-8c17-3d7abe75129e" width="700px">
 
+#### Raw data
+| Grids/second | v1.0      | v2.0      | v3.0      | v3.0 with heuristic |
+|--------------|-----------|-----------|-----------|---------------------|
+| 17 clues     | 0.04      | 0.19      | 0.24      | 559.49              |
+
+</div>
 
 ## Update log
 - **v1.0** - Plain backtracking with no optimizations
