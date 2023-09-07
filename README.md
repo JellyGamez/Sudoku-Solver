@@ -30,7 +30,7 @@ It can also be configured to use a **heuristic** known as **MRV** (Minimum Remai
 
 - **3.0** - Complete file restructure for improved readability and configurability
 
-## Usage
+## Configuration
 
 ### Template
 Each input grid has to respect the following template:
@@ -43,7 +43,7 @@ Each input grid has to respect the following template:
 **Note**: The solver assumes all grids respect the above template.
 
 
-### Configuration
+### Configuration file
 Once you've prepared a file with your desired puzzles, navigate to the **config.rs** file located in the **src** directory, and adjust your configuration settings as needed:
 
 ```rust
@@ -70,7 +70,7 @@ git clone https://github.com/JellyGamez/Sudoku-solver.git
 cd Sudoku-solver
 ```
 
-### 3. Set up the configuration file
+### 3. Configure the project
   The configuration process is explained [here](#configuration).
   
 ### 4. Launch the solver
