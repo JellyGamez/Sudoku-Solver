@@ -19,7 +19,7 @@ There are 3 main datasets I used for benchmarking:
 |------|--------|------|
 |<img src="https://github.com/JellyGamez/Sudoku-solver/assets/75379898/3b8f0c11-93f0-4e9e-9306-4580fc6151dc" width="700px">|<img src="https://github.com/JellyGamez/Sudoku-solver/assets/75379898/daf66a41-7d3a-4400-b5ce-f9f92a175254" width="700px">|<img src="https://github.com/JellyGamez/Sudoku-solver/assets/75379898/a22eb02f-a04b-49df-8600-b79e508df0f4" width="700px">|
 
-Additionally, I used [this](https://github.com/t-dillon/tdoku/blob/master/data.zip) dataset which consists of only 17 clues puzzles. (It's the only working link I could find)
+Additionally, I used [this](https://github.com/t-dillon/tdoku/blob/master/data.zip) dataset which consists of only 17 clues puzzles. (The smallest possible number of clues for a solvable sudoku puzzle)
 
 **The following benchmarks represent the average results obtained from 5 distinct runs for each dataset across all versions.**
 
