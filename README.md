@@ -1,4 +1,6 @@
 # Sudoku solver
+
+## Introduction
 This project brings together my passion for Sudoku and my eagerness to learn a new programming language. So i gave myself a challenge and went with Rust, which I was completely unfamiliar with.
 
 ## Approach
@@ -9,8 +11,6 @@ It can also be configured to use a **heuristic** known as **MRV** (Minimum Remai
 **Theoretically**, this reduces the number of possibilities that need to be explored in the search tree, ultimately making the algorithm more efficient and faster. 
 
 **In practice**, depending on the provided dataset, this option can either speed up the algorithm by as much as **1000x** (particularly for 17 clue grids with overall large candidates sets), or it might marginally affect performance (typically applies to easy grids, as the number of candidates for each cell is already very small, making the selection of the best cell almost redundant).
-
-
 
 ## Benchmarks
 *work in progress*
@@ -66,6 +66,7 @@ cd Sudoku-solver
 
 ### 3. Set up the config.rs file
   The configuration process is explained [here](#configuration).
+  
 ### 4. Launch the solver
 ```sh
 cargo run --release
