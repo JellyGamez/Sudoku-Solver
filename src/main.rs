@@ -11,7 +11,7 @@ use crate::config::
     PRINT_STATS as print_stats,
     NUMBER_OF_GRIDS as number_of_grids, 
     PRINT_SOLVED_GRIDS as print_solved_grids,
-    FEWEST_CANDIDATES_HEURISTIC as heuristic
+    MRV_HEURISTIC as heuristic
 };
 
 fn main() 
