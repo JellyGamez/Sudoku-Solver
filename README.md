@@ -46,25 +46,16 @@ Each input grid has to respect the following template:
 ### Configuration
 Once you've prepared a file with your desired puzzles, navigate to the **config.rs** file located in the **src** directory, and adjust your configuration settings as needed:
 
-- **Input file path**
 ```rust
-pub const FILE_NAME: &str = "";
-```
-- **Option to print statistics after solving all grids**
-```rust
-pub const PRINT_STATS: bool = true;
-```
-- **The number of grids to solve from the file**
-```rust
-pub const NUMBER_OF_GRIDS: usize = 1;
-```
-- **Option to print solved grids to standard output**
-```rust
-pub const PRINT_SOLVED_GRIDS: bool = false;
-```
-- **Option to enable fewer candidates first heuristic**
-```rust
-pub const MRV_HEURISTIC: bool = false;
+pub const FILE_NAME: &str = ""; // Input file path
+
+pub const PRINT_STATS: bool = true; // Option to print statistics after solving all grids
+
+pub const NUMBER_OF_GRIDS: usize = 1; // The number of grids to solve from the file
+
+pub const PRINT_SOLVED_GRIDS: bool = false; // Option to print solved grids to standard output
+
+pub const MRV_HEURISTIC: bool = false; // Option to enable fewer candidates first heuristic
 ```
 
 ## Getting started
