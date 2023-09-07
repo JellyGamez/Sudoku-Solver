@@ -15,6 +15,21 @@ It can also be configured to use a **heuristic** known as **MRV** (Minimum Remai
 ## Benchmarks
 *work in progress*
 
+
+## Update log
+- **1.0** - Plain backtracking with no optimizations
+- **1.1** - A few tweaks, including stopping the backtracking early if a solution is found
+
+<!-- -->
+
+- **2.0** - Implemented bitmasks and proper display traits
+- **2.1** - Cleaned up code and refactored for performance
+- **2.2** - Implemented MRV heuristic
+
+<!-- -->
+
+- **3.0** - Complete file restructure for improved readability and configurability
+
 ## Usage
 
 ### Template
