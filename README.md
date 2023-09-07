@@ -35,19 +35,23 @@ There are 3 main datasets I used for benchmarking:
 
 </div>
 
+<img src="https://github.com/JellyGamez/Sudoku-solver/assets/75379898/c4b9ba4d-d2cc-4c0a-8e95-9d353be72d56" width="700px">
+<img src="https://github.com/JellyGamez/Sudoku-solver/assets/75379898/4aedca9f-55cf-41b4-8c17-3d7abe75129e" width="700px">
+
+
 ## Update log
-- **1.0** - Plain backtracking with no optimizations
-- **1.1** - A few tweaks, including stopping the backtracking early if a solution is found
+- **v1.0** - Plain backtracking with no optimizations
+- **v1.1** - A few tweaks, including stopping the backtracking early if a solution is found
 
 <!-- -->
 
-- **2.0** - Implemented bitmasks and proper display traits
-- **2.1** - Cleaned up code and refactored for performance
-- **2.2** - Implemented MRV heuristic
+- **v2.0** - Implemented bitmasks and proper display traits
+- **v2.1** - Cleaned up code and refactored for performance
+- **v2.2** - Implemented MRV heuristic
 
 <!-- -->
 
-- **3.0** - Complete file restructure for improved readability and configurability
+- **v3.0** - Complete file restructure for improved readability and configurability
 
 ## Configuration
 
