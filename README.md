@@ -13,7 +13,25 @@ It can also be configured to use a **heuristic** known as **MRV** (Minimum Remai
 **In practice**, depending on the provided dataset, this option can either speed up the algorithm by as much as **1000x** (particularly for 17 clue grids with overall large candidates sets), or it might marginally affect performance (typically applies to easy grids, as the number of candidates for each cell is already very small, making the selection of the best cell almost redundant).
 
 ## Benchmarks
-*work in progress*
+There are 3 main datasets I used for benchmarking:
+
+| [Easy](https://www.kaggle.com/datasets/bryanpark/sudoku) | [Medium](https://www.kaggle.com/datasets/rohanrao/sudoku) | [Hard](https://www.kaggle.com/datasets/radcliffe/3-million-sudoku-puzzles-with-ratings) |
+|------|--------|------|
+|<img src="https://github.com/JellyGamez/Sudoku-solver/assets/75379898/3b8f0c11-93f0-4e9e-9306-4580fc6151dc" width="700px">|<img src="https://github.com/JellyGamez/Sudoku-solver/assets/75379898/daf66a41-7d3a-4400-b5ce-f9f92a175254" width="700px">|<img src="https://github.com/JellyGamez/Sudoku-solver/assets/75379898/a22eb02f-a04b-49df-8600-b79e508df0f4" width="700px">|
+
+### 1. [Easy](https://www.kaggle.com/datasets/bryanpark/sudoku)
+<img src="https://github.com/JellyGamez/Sudoku-solver/assets/75379898/3b8f0c11-93f0-4e9e-9306-4580fc6151dc" width="600px">
+
+
+### 2. [Medium](https://www.kaggle.com/datasets/rohanrao/sudoku)
+
+
+### 3. [Hard](https://www.kaggle.com/datasets/radcliffe/3-million-sudoku-puzzles-with-ratings)
+
+
+
+### Note
+
 
 
 ## Update log
