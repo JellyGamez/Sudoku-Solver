@@ -58,7 +58,7 @@ Additionally, I used [this](https://github.com/t-dillon/tdoku/blob/master/data.z
 
 ## Update log
 - **v1.0** - Plain backtracking with no optimizations
-- **v1.1** - A few tweaks, including stopping the backtracking early if a solution is found
+- **v1.1** - A few tweaks, including backtracking shortcuts and better compiler configuration
 
 <!-- -->
 
