@@ -44,7 +44,6 @@ impl Sudoku
             empty: empty,
             solved: false,
             heuristic: heuristic,
-
         }
     }
 
@@ -55,7 +54,8 @@ impl Sudoku
         {
             return;
         }
-        if pos == self.empty.len() {
+        if pos == self.empty.len() 
+        {
             self.solved = true;
             return;
         }
@@ -104,8 +104,10 @@ impl Sudoku
     }
 }
 
-impl fmt::Display for Sudoku {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+impl fmt::Display for Sudoku 
+{
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result 
+    {
         writeln!(f, "+-------+-------+-------+")?;
         for i in 0..9
         {

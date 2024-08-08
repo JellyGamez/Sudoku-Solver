@@ -64,7 +64,7 @@ fn main()
             println!("Average grids per second: {}", solved as f32 / elapsed);
         }
     }
-    else 
+    else
     {
         eprintln!("File not found.");
     }
