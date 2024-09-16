@@ -107,7 +107,7 @@ cd Sudoku-solver
 ```
 
 ### 3. Configure the project
-  The configuration process is explained [here](#configuration).
+[The configuration process is explained here](#configuration).
   
 ### 4. Launch the solver
 ```sh
