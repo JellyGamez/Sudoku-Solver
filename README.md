@@ -80,7 +80,7 @@ Each input grid has to respect the following template:
 
 
 ### Configuration file
-Once you've prepared a file with your desired puzzles, navigate to the **config.rs** file located in the **src** directory, and adjust your configuration settings as needed:
+Once you've prepared a file with your desired puzzles, navigate to the **src/config.rs** file and adjust your configuration settings as needed.
 
 ```rust
 pub const FILE_NAME: &str = "";             // Input file path
