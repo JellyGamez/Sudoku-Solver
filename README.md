@@ -1,6 +1,4 @@
 # Sudoku solver
-
-## Introduction
 This project brings together my passion for Sudoku and my desire to learn a new programming language - Rust. Despite my initial unfamiliarity, I took the challenge and discovered that Rust is not only powerful and exceptionally fast but also really enjoyable to code in.
 
 ## Approach
@@ -17,7 +15,7 @@ There are 3 main datasets I used for benchmarking:
 
 | [Easy](https://www.kaggle.com/datasets/bryanpark/sudoku) | [Medium](https://www.kaggle.com/datasets/rohanrao/sudoku) | [Hard](https://www.kaggle.com/datasets/radcliffe/3-million-sudoku-puzzles-with-ratings) |
 |------|--------|------|
-|<img src="https://github.com/JellyGamez/Sudoku-solver/assets/75379898/3b8f0c11-93f0-4e9e-9306-4580fc6151dc" width="700px">|<img src="https://github.com/JellyGamez/Sudoku-solver/assets/75379898/daf66a41-7d3a-4400-b5ce-f9f92a175254" width="700px">|<img src="https://github.com/JellyGamez/Sudoku-solver/assets/75379898/a22eb02f-a04b-49df-8600-b79e508df0f4" width="700px">|
+|<img src="https://github.com/JellyGamez/Sudoku-solver/assets/75379898/3b8f0c11-93f0-4e9e-9306-4580fc6151dc" width="700px" height="240px">|<img src="https://github.com/JellyGamez/Sudoku-solver/assets/75379898/daf66a41-7d3a-4400-b5ce-f9f92a175254" width="700px" height="240px">|<img src="https://github.com/JellyGamez/Sudoku-solver/assets/75379898/a22eb02f-a04b-49df-8600-b79e508df0f4" width="700px" height="240px">|
 
 Additionally, I used [this](https://github.com/t-dillon/tdoku/blob/master/data.zip) dataset, specifically the one which consists of only 17 clues puzzles. (The smallest possible number of clues for a solvable sudoku puzzle)
 
@@ -85,18 +83,18 @@ Each input grid has to respect the following template:
 Once you've prepared a file with your desired puzzles, navigate to the **config.rs** file located in the **src** directory, and adjust your configuration settings as needed:
 
 ```rust
-pub const FILE_NAME: &str = ""; // Input file path
+pub const FILE_NAME: &str = "";             // Input file path
 
-pub const PRINT_STATS: bool = true; // Option to print statistics after solving all grids
+pub const PRINT_STATS: bool = true;         // Option to print statistics after solving all grids
 
-pub const NUMBER_OF_GRIDS: usize = 1; // The number of grids to solve from the file
+pub const NUMBER_OF_GRIDS: usize = 1;       // The number of grids to solve from the file
 
 pub const PRINT_SOLVED_GRIDS: bool = false; // Option to print solved grids to standard output
 
-pub const MRV_HEURISTIC: bool = false; // Option to enable fewer candidates first heuristic
+pub const MRV_HEURISTIC: bool = false;      // Option to enable fewer candidates first heuristic
 ```
 
-## Getting started
+## Quick Start
 
 ### 1. Clone the project
 ```bash
